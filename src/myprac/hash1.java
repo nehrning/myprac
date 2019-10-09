@@ -2,7 +2,7 @@ package myprac;
 
 import java.util.*;
 
-class Solution {
+class hash1 {
     public String solution(String[] participant, String[] completion) {
         String answer = "";
         HashMap<String, Integer> hm = new HashMap<String, Integer>();
