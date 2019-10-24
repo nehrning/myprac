@@ -5,12 +5,9 @@ import java.util.*;
 public class hash4 {
 	
 	public static void main(String[] args) {
-		Solution s = new Solution();
-		String[] genres = {"c","p","c","c","p"};
-		int[] plays = {800,600,150,800,2500};
-		int[] res = s.solution(genres, plays);
-		for(int r : res)
-			System.out.println(r);
+		graph5 g = new graph5();
+		int[] arrow = {6, 6, 6, 4, 4, 4, 2, 2, 2, 0, 0, 0, 1, 6, 5, 5, 3, 6, 0};
+		g.solution(arrow);
     }
 }
 

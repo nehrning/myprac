@@ -1,0 +1,5 @@
+﻿  fuctionLesson.cpp
+c:\users\user\documents\myprac\project1\project1\fuctionlesson.cpp(24): error C3312: no callable 'begin' function found for type 'int []'
+c:\users\user\documents\myprac\project1\project1\fuctionlesson.cpp(24): error C3312: no callable 'end' function found for type 'int []'
+c:\users\user\documents\myprac\project1\project1\fuctionlesson.cpp(32): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\user\documents\myprac\project1\project1\fuctionlesson.cpp(33): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
