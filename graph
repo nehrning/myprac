@@ -1,0 +1,50 @@
+#include "pch.h"
+#include<iostream>
+#include "CustomGraph.h"
+
+CustomGraph::CustomGraph()
+{
+	initGraph();
+}
+
+CustomGraph::~CustomGraph()
+{
+}
+
+void CustomGraph::initGraph()
+{
+	pG = new graphType();
+	pG->n = 0;
+	for (int i = 0; i < MAX_VERTEX; i++)
+		pG->adjList_H[i] = nullptr;
+}
+
+void CustomGraph::insertVertex()
+{
+	if ((pG->n) + 1 > MAX_VERTEX) {
+		std::cout << "오버 플로우" << std::endl;
+		return;
+	}
+	pG->n++;
+}
+
+void CustomGraph::insertEdge(int u, int v)
+{
+	graphNode *node = new graphNode();
+	node->vertex = v;
+	node->link = pG->adjList_H[u];
+	pG->adjList_H[u] = node;
+}
+
+void CustomGraph::printData()
+{
+	graphNode* p;
+	for (int i = 0; i < pG->n; i++) {
+		printf("\n%c", i + 65);
+		p = pG->adjList_H[i];
+		while (p) {
+			printf(" %c->%c", i + 65, p->vertex + 65);
+			p = p->link;
+		}
+	}
+}
