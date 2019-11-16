@@ -1,0 +1,152 @@
+#include "pch.h"
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <queue>
+#include <stack>
+#include <map>
+using namespace std;
+
+typedef vector<int> datalist;
+typedef datalist::iterator itor;
+
+typedef map<int, string> myMap;
+typedef myMap::iterator mItor;
+
+struct Message {
+	int n;
+	string message;
+};
+int main()
+{
+	cout << "Queue" << endl;
+	//message queue
+	//windows programming
+	/*
+	while(peekMessage != end)
+		translateMessage 메세지 번역
+		DispatchMessage 메세지 처리
+	*/
+	queue<int> *pQue = new queue<int>();//선입선출
+	pQue->push(10); 
+	pQue->push(20);
+	pQue->push(30);
+	int n = pQue->front();
+	cout << n << endl;
+	cout << pQue->size() << endl;
+	pQue->pop();
+	cout << pQue->size() << endl;
+	cout << (pQue->empty() ? "yes" : "no") << endl;
+	//push 데이터 추가
+	//pop 데이터 삭제(리턴값 없음)
+	//front 큐 제일 앞에 있는 원소를 반환(삭제안함)
+	//back 큐 제일 뒤에 있는 원소를 반환(삭제안함)
+	//empty 큐가 비어있으면 true
+	//size 큐 사이즈를 반환
+
+	while (!pQue->empty())
+		pQue->pop();
+	if (pQue != nullptr) {
+		delete pQue;
+		pQue = nullptr;
+	}
+
+	cout << "Vector" << endl;
+	datalist *pDatalist = new datalist();
+	itor it;
+	pDatalist->reserve(10);
+	pDatalist->push_back(10);
+	pDatalist->push_back(20);
+	pDatalist->push_back(30);
+	//reserve 벡터의 크기할당
+	//push_back 뒤에 삽입
+	//at 해당위치 원소 반환(삭제 X)
+	it = pDatalist->end();
+	it = pDatalist->insert(it, 1000);
+	it = pDatalist->insert(it, 2000);
+	for(it = pDatalist->begin(); it != pDatalist->end(); ++it)
+		cout << *it << endl;
+
+	for (it = pDatalist->begin(); it != pDatalist->end();) {
+		if (*it == 1000) it = pDatalist->erase(it);
+		else it++;
+	}
+
+	for (it = pDatalist->begin(); it != pDatalist->end(); ++it)
+		cout << *it << endl;
+		
+	cout << pDatalist->at(0) << endl;
+
+	pDatalist->clear();
+	if (pDatalist != nullptr) {
+		delete pDatalist;
+		pDatalist = nullptr;
+	}
+	cout << "Stack" << endl;
+	stack<Message*> *pStack = new stack<Message*>();
+	for (int i = 0; i < 3; i++) {
+		Message *pTmp = new Message();
+		pTmp->n = 10;
+		string str = "front";
+		pTmp->message = "Move_" + to_string(i);
+		pStack->push(pTmp);
+	}
+
+	Message* pN = pStack->top();
+	cout << (pN->message).c_str() << endl;
+	pStack->pop();
+	cout << pStack->size() << endl;
+
+	while (!pStack->empty()) {
+		pN = pStack->top();
+		delete pN;
+		pStack->pop();
+	}
+	if (pStack != nullptr) {
+		delete pStack;
+		pStack = nullptr;
+	}
+
+	cout << "Map" << endl;
+	myMap *pMap = new myMap();
+	mItor mIt;
+	for (int i = 0; i < 3; i++)
+		pMap->insert(make_pair(2-i, "map"+ to_string(i)));
+	for (mIt = pMap->begin(); mIt != pMap->end(); mIt++)
+		cout << mIt->first << " " << mIt->second << endl;
+	//at 키로 val 반환
+	//find 키로 key,val 모두 반환
+	pMap->clear();
+	if (pMap != nullptr) {
+		delete pMap;
+		pMap = nullptr;
+	}
+
+	cout << "multiMap" << endl;
+	multimap<int, int> mulMap;
+	multimap<int, int>::iterator iter;
+	mulMap.insert(make_pair(1, 1));
+	mulMap.insert(make_pair(1, 2));
+	mulMap.insert(make_pair(2, 3));
+	for(iter = mulMap.begin(); iter != mulMap.end(); iter++)
+		cout << iter->first << " " << iter->second << endl;
+
+	for(iter = mulMap.equal_range(1).first; iter != mulMap.equal_range(1).second; iter++)
+		cout << iter->first << " " << iter->second << endl;
+
+	for (iter = mulMap.equal_range(1).first; iter != mulMap.equal_range(1).second;)
+		if (iter->second == 1)
+			mulMap.erase(iter++);
+		else iter++;
+
+	for (iter = mulMap.begin(); iter != mulMap.end(); iter++)
+		cout << iter->first << " " << iter->second << endl;
+
+	mulMap.erase(1);
+	for (iter = mulMap.begin(); iter != mulMap.end(); iter++)
+		cout << iter->first << " " << iter->second << endl;
+
+	mulMap.clear();
+	return 0;
+}
