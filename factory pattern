@@ -1,0 +1,89 @@
+// ConsoleApplication15.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+//
+
+#include "pch.h"
+#include <iostream>
+
+using namespace std;
+
+//factory method pattern
+
+class Document
+{
+public:
+	virtual bool Open(const char* pFileName) = 0;
+};
+
+template<class T>
+class DocumentGenerator : public Document {
+public:
+	bool Open(const char* pFileName) {
+		cout << "Open" << endl;
+	}
+};
+/*
+class HwpDocument : public Document {
+public:
+	bool Open(const char* pFileName) {
+		cout << "HwpDoc Open" << endl;
+	}
+};
+
+class MsWordDocument : public Document {
+public:
+	bool Open(const char* pFileName) {
+		cout << "MsWordDoc Open" << endl;
+	}
+};*/
+
+class Application {
+public:
+	void NewDocumet(const char* pFileName) {
+		Document* pDoc = CreateDocument();
+		pDoc->Open(pFileName);
+	}
+	virtual Document* CreateDocument() = 0;
+};
+/*
+class HwpApplication : public Application {
+public:
+	Document* CreateDocument() {
+		return new HwpDocument;
+	}
+};
+
+class MsWordApplication : public Application {
+public:
+	Document* CreateDocument() {
+		return new MsWordDocument;
+	}
+};
+*/
+
+template<class T>
+class ConcreteGenerator : public Application {
+public:
+	Document* CreateDocument() {
+		return new T();
+	}
+};
+int main()
+{
+	/*
+	Application* pApp = new HwpApplication();
+	pApp->NewDocumet("open");
+
+	Application* pApp_1 = new MsWordApplication();
+	pApp_1->NewDocumet("open");
+
+	delete pApp;
+	delete pApp_1;
+	*/
+	ConcreteGenerator<HwpDocument>* tmp = new ConcreteGenerator<HwpDocument>();
+	tmp->NewDocumet("open");
+
+	if (tmp != nullptr) {
+		delete tmp;
+		tmp = nullptr;
+	}
+}
