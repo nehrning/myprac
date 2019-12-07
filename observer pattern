@@ -1,0 +1,71 @@
+// ConsoleApplication16.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
+//
+
+#include "pch.h"
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Iobserver {
+public:
+	virtual void Update(int n) = 0;
+};
+
+class Column : public Iobserver{
+public:
+	void Update(int n) {
+		cout << "Column : ";
+		for (int i = 0; i < n; ++i)
+		{
+			cout << "!";
+		}
+		cout << endl;
+	}
+};
+
+class Row : public Iobserver {
+public:
+	void Update(int n) {
+		cout << "Row : ";
+		for (int i = 0; i < n; ++i)
+		{
+			cout << ")";
+		}
+		cout << endl;
+	}
+};
+
+class Table {
+public:
+	vector<Iobserver*> obs;
+	void Add(Iobserver* p) { obs.push_back(p); }
+	void Erase(Iobserver* p) { }
+	void Edit() {
+		while (true) {
+			int data;
+			cout << "Data를 넣으세요" << endl;
+			cin >> data;
+			for (int i = 0; i < obs.size(); ++i) {
+				obs[i]->Update(data);
+			}
+		}
+	}
+};
+int main()
+{
+	Table* pTable = new Table();
+	Column* pColumn = new Column();
+	Row* pRow = new Row();
+
+	pTable->Add(pColumn);
+	pTable->Add(pRow);
+	pTable->Edit();
+
+	if (pTable) delete pTable;
+	if (pColumn) delete pColumn;
+	if (pRow) delete pRow;
+	pTable = nullptr;
+	pColumn = nullptr;
+	pRow = nullptr;
+}
