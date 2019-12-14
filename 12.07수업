@@ -36,5 +36,9 @@ collider 충돌의 기능을 구현
 
 start 함수 랜더링되기 바로 직전에 호출
 awake 인스턴스가 생성될 때 호출
-onEnable - 게임 오브젝트 활성화 
-onDisable - 게임 오브젝트 비활성화
+onEnable - 게임 오브젝트 활성화 SetActive(true)
+onDisable - 게임 오브젝트 비활성화 SetActive(false)
+//유니티는 물리 시스템 업데이트와 일반 업데이트를 구분지어 놓았다.
+update - 매 프레임마다 호출
+fixedUpdate - 물리 업데이트 시 호출 (갱신 주기가 update보다 느림, 물리량을 사용할때 게임의 전체적인 규모를 고려하여 사용해야 한다.)
+lateUpdate - 업데이트 중 제일 나중에 호출 
