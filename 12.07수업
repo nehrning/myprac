@@ -34,3 +34,5 @@ mesh renderer 화면에 그려주는 기능. 텍스쳐등의 정보
 
 collider 충돌의 기능을 구현
 
+start 함수 랜더링되기 바로 직전에 호출
+awake 인스턴스가 생성될 때 호출
