@@ -1,0 +1,11 @@
+위치관련 프로퍼티는 transform을 통해 접근한다.
+
+위치 : transform.position
+회전 : transform.localEulerAngles, transform.eulerAngles, transform.rotation
+크기 : transform.localScale
+
+transform프로퍼티는 Vector3타입을 이용
+
+Time.deltaTime : update 시간 간격을 의미한다
+움직이는 모든 오브젝트는 업데이트 시간간격을 적용해야 한다.
+
