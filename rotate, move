@@ -1,0 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Character : MonoBehaviour
+{
+	// Start is called before the first frame update
+
+	float moveSpeed = 1;
+	float rotateSpeed = 1;
+	Vector3 vEnd = Vector3.zero;
+    void Start()
+    {
+		vEnd.Set(5, 5, 0);
+		Debug.Log(transform.position);
+		Debug.Log(transform.position.x);
+		Debug.Log(transform.position.y);
+		Debug.Log(transform.position.z);
+	}
+
+    // Update is called once per frame
+    void Update()
+    {
+		//Move();
+		Rotate();
+	}
+
+	private void Rotate()
+	{
+		//Vec
+		//transform.Rotate(Vector3.up, Time.deltaTime);
+		//transform.Rotate(new Vector3(0, rotateSpeed * Time.deltaTime, 0));// 각도임
+		//transform.Rotate(Vector3.left, rotateSpeed * Time.deltaTime);
+		//transform.Rotate(Vector3.left, rotateSpeed * Time.deltaTime, Space.World);
+		////
+		//Vector3 v = transform.localEulerAngles;
+		//v.y += Time.deltaTime * rotateSpeed;
+		//transform.localEulerAngles = v;
+		////
+
+		Vector3 targetDirection = vEnd - transform.position;
+		float singleStep = rotateSpeed * Time.deltaTime;
+		Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, singleStep, 0.0f);
+		transform.rotation = Quaternion.LookRotation(newDirection);
+	}
+
+	private void Move()
+	{
+		/*
+		Vector3 p = transform.position;
+		p.x += Input.GetAxis("Horizontal") * Time.deltaTime * moveSpeed;
+		if(Input.GetKey(KeyCode.Space))
+			p.y += Time.deltaTime * moveSpeed;
+		if (!Input.GetKey(KeyCode.Space))
+			p.y -= Time.deltaTime * moveSpeed;
+		p.z += Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed;
+		transform.position = p;
+		*/
+		/*
+		Vector3 v = transform.position;
+		v.x += moveSpeed * Time.deltaTime;
+		v.y += moveSpeed * Time.deltaTime;
+		v.z += moveSpeed * Time.deltaTime;
+
+		transform.position = v;
+		*/
+
+		Vector3 v = transform.position;
+		v = Vector3.MoveTowards(v, vEnd, Time.deltaTime * moveSpeed);
+		transform.position = v;
+	}
+}
