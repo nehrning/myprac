@@ -9,3 +9,10 @@ transform프로퍼티는 Vector3타입을 이용
 Time.deltaTime : update 시간 간격을 의미한다
 움직이는 모든 오브젝트는 업데이트 시간간격을 적용해야 한다.
 
+moveTowards -(현재좌표, 도착위치, 이동속도) 도착위치까지 이동하면 움직이지 않음
+
+Vector3.right/left 0,1,0을 의미 (x축으로 회전)
+Vector3.up/down 0,1,0을 의미 (y축으로 회전)
+Vector3.forward/back 0,1,0을 의미 (z축으로 회전)
+
+
