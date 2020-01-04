@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
 		trPos = _pos;
 		bfire = true;
 		//transformPoint 지역좌표를 월드좌표로 변환
-		transform.position = trPos.TransformPoint(trPos.localPosition);
+		transform.position = trPos.position;
 		dir = trPos.forward;
 	}
 }
