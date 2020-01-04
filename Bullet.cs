@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-	public float speed = 10f;
+	public float speed = 50f;
 	bool bfire = false;
 	Transform trPos;
 	Vector3 dir = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
-        
+		//Destroy(this.gameObject, 1f);
     }
 
-    // Update is called once per frame
-    void Update()
+	void OffBullet()
+	{
+		this.gameObject.SetActive(false);
+	}
+
+	// Update is called once per frame
+	void Update()
     {
-		if(bfire){
+		if (bfire)
+		{
 			//transform.Translate(dir * Time.deltaTime * speed);
 			Vector3 tmp = transform.position;
 			tmp.x = tmp.x + dir.x * Time.deltaTime * speed;
@@ -29,9 +35,9 @@ public class Bullet : MonoBehaviour
 
 	public void SetFirePosition(Transform _pos)
 	{
+		Invoke("OffBullet", 3f);
 		trPos = _pos;
 		bfire = true;
-		//transformPoint 지역좌표를 월드좌표로 변환
 		transform.position = trPos.position;
 		dir = trPos.forward;
 	}

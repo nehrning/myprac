@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
 
-	public int MAX_BULLET = 10;
+	public int MAX_BULLET = 20;
 	public Transform BulletPos;
 	/*
 	 * public 변수는 inspector에 공개됨
@@ -44,6 +46,9 @@ public class Gun : MonoBehaviour
 	 *  
 	 */
 	GameObject _bullet;
+
+	List<Bullet> bulletList = new List<Bullet>();
+
 	void Awake()
 	{
 		_bullet = Resources.Load("Bullet") as GameObject;
@@ -60,11 +65,26 @@ public class Gun : MonoBehaviour
     {
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			GameObject tmp = Instantiate(_bullet);
-			Bullet bulletScript = tmp.AddComponent<Bullet>();
-			bulletScript.SetFirePosition(BulletPos);
-			//tmp.AddComponent<Bullet>();
-			//tmp.transform.position = BulletPos.position;
+			if (bulletList.Count < MAX_BULLET)
+			{
+				GameObject tmp = Instantiate(_bullet);
+				Bullet bulletScript = tmp.AddComponent<Bullet>();
+				bulletScript.SetFirePosition(BulletPos);
+
+				bulletList.Add(bulletScript);
+			}
+			else
+			{
+				//리스트에서 활성화 상태가 false인 게임오브젝트를 검사해서 리턴
+				Bullet enableBullet = bulletList.Find(o => (o.gameObject.activeSelf == false));
+				//activeSelf 활성화 비활성화 함수
+				//SetActive 함수는 이 변수를 변경하는 것
+				if(enableBullet != null)
+				{
+					enableBullet.gameObject.SetActive(true);
+					enableBullet.SetFirePosition(BulletPos);
+				}
+			}
 		}
     }
 }

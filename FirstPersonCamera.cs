@@ -6,8 +6,16 @@ using UnityEngine;
 
 public class FirstPersonCamera : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+	void Awake()
+	{
+		Camera.main.transform.eulerAngles = new Vector3(0, 0, 0);
+		Input.mousePosition.Set(0, 0, 0);
+		//Screen.height
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
