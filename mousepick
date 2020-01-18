@@ -1,0 +1,61 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MousePick : MonoBehaviour
+{
+
+	// 화면상의 마우스로 클릭한 곳을 게임공간의 좌표로 변환하여 찾아내는 것
+
+	// Start is called before the first frame update
+	Vector3 vEnd;
+
+	void Start()
+    {
+		vEnd = transform.position;
+	}
+
+    // Update is called once per frame
+    void Update()
+    {
+		Picking();
+		Rotate();
+		Move();
+	}
+
+	void Picking()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			RaycastHit info;
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+			if (Physics.Raycast(ray, out info))
+			{
+				Debug.Log(info.collider.name);
+				Debug.Log(info.point);
+				if (info.collider.tag == "terrain")
+				{
+					vEnd = info.point;
+					vEnd.y += 0.5f;
+				}
+			}
+		}
+	}
+
+	void Move()
+	{
+		float moveSpeed = 10f;
+		Vector3 v = transform.position;
+		v = Vector3.MoveTowards(v, vEnd, Time.deltaTime*moveSpeed);
+		transform.position = v;
+	}
+
+	void Rotate()
+	{
+		float RotateSpeed = 10.0f;
+		Vector3 targetDirection = vEnd - transform.position;
+		Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, RotateSpeed * Time.deltaTime, 0.0f);
+		transform.rotation = Quaternion.LookRotation(newDirection);
+	}
+}
