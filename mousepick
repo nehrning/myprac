@@ -9,7 +9,7 @@ public class MousePick : MonoBehaviour
 
 	// Start is called before the first frame update
 	Vector3 vEnd;
-
+	bool bRotate = false;
 	void Start()
     {
 		vEnd = transform.position;
@@ -19,14 +19,17 @@ public class MousePick : MonoBehaviour
     void Update()
     {
 		Picking();
-		Rotate();
-		Move();
+		if(bRotate)
+			Rotate();
+		else
+			Move();
 	}
 
 	void Picking()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
+			bRotate = true;
 			RaycastHit info;
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -55,7 +58,22 @@ public class MousePick : MonoBehaviour
 	{
 		float RotateSpeed = 10.0f;
 		Vector3 targetDirection = vEnd - transform.position;
+
+		if (Vector3.Dot(transform.forward, targetDirection.normalized).CompareTo(0.99f) >= 0)
+			bRotate= !bRotate;
+
+		/*
 		Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, RotateSpeed * Time.deltaTime, 0.0f);
 		transform.rotation = Quaternion.LookRotation(newDirection);
+		*/
+
+		Vector3 lookat = Vector3.RotateTowards(transform.forward, targetDirection.normalized, Time.deltaTime * 10f, 10f);
+		transform.LookAt(transform.position + lookat);
+		/*
+		Vector3 tmp = transform.eulerAngles;
+		tmp.x = 0;
+		tmp.z = 0;
+		transform.eulerAngles = tmp;
+		*/
 	}
 }
