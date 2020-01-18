@@ -1,0 +1,17 @@
+싱글톤공부
+
+프로퍼티 
+
+private int _iCount = 10;
+
+	// 외부에서는 iCount변수에 접근하여 _iCount 값을 변경
+	public int iCount
+	{
+		get { return _iCount; }
+		set { _iCount = value; }
+	}
+  
+델리게이트
+
+함수 포인터의 개념, 확장성을 위해 주로 사용
+  public delegate void f_1();
