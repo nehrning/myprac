@@ -1,0 +1,4 @@
+애니메이션의 끝 프레임은 stateInfo.normalizedTime % 1f; 을 통해 계산
+
+
+
