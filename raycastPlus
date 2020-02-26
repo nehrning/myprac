@@ -1,0 +1,10 @@
+Physics Raycast(ray.origin, ray.direction, out rayHit, distance)// 시작위치, 방향, 반환장소, 레이의 길이 값
+
+
+void OnDrawGizmos(){
+  Debug.DrawRay(ray.origin, ray.direction*distance, Color.red);
+  //실제 게임에서는 표시되지 않고 디버그 모드에서만 레이가 선택한 색으로 그려짐.
+}
+
+
+
