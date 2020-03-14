@@ -1,0 +1,21 @@
+rect를 이용한 충돌
+
+rect는 사각형을 의미
+
+과거 윈도우즈프로그래밍의 rect와는 약간 차이
+
+
+Left top          Right top
+
+          position(중앙점)
+
+Left bottom       Right bottom
+
+min과 max값을 반드시 설정
+-직사각형에서도 적용
+
+단점 - 사각형 충돌은 회전이 되지 않음
+
+AABB충돌체 회전적용 안됨
+OBB 충돌체 
+
